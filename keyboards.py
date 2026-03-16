@@ -2,7 +2,6 @@ from aiogram.types import InlineKeyboardMarkup, InlineKeyboardButton
 
 
 def get_main_menu():
-    """Главное меню"""
     return InlineKeyboardMarkup(inline_keyboard=[
         [InlineKeyboardButton(text="👤 Мой герой", callback_data="my_character")],
         [InlineKeyboardButton(text="🎲 Присоединиться к игре", callback_data="join_game")],
@@ -11,7 +10,6 @@ def get_main_menu():
 
 
 def get_character_menu():
-    """Меню персонажа"""
     return InlineKeyboardMarkup(inline_keyboard=[
         [InlineKeyboardButton(text="✏️ Редактировать", callback_data="edit_character")],
         [InlineKeyboardButton(text="🗑 Удалить", callback_data="delete_character")],
@@ -20,43 +18,32 @@ def get_character_menu():
 
 
 def get_race_selection_menu(races):
-    """Меню выбора расы"""
     keyboard = []
     for i in range(0, len(races), 2):
         row = []
         for j in range(2):
             if i + j < len(races):
                 race = races[i + j]
-                row.append(InlineKeyboardButton(
-                    text=race['name'], 
-                    callback_data=f"select_race_{race['index']}"
-                ))
+                row.append(InlineKeyboardButton(text=race['name'], callback_data=f"select_race_{race['index']}"))
         keyboard.append(row)
-    
-    keyboard.append([InlineKeyboardButton(text="◀️ Назад", callback_data="my_character")])
+    keyboard.append([InlineKeyboardButton(text="◀️ Назад", callback_data="edit_character")])
     return InlineKeyboardMarkup(inline_keyboard=keyboard)
 
 
 def get_class_selection_menu(classes):
-    """Меню выбора класса"""
     keyboard = []
     for i in range(0, len(classes), 2):
         row = []
         for j in range(2):
             if i + j < len(classes):
                 cls = classes[i + j]
-                row.append(InlineKeyboardButton(
-                    text=cls['name'], 
-                    callback_data=f"select_class_{cls['index']}"
-                ))
+                row.append(InlineKeyboardButton(text=cls['name'], callback_data=f"select_class_{cls['index']}"))
         keyboard.append(row)
-    
-    keyboard.append([InlineKeyboardButton(text="◀️ Назад", callback_data="my_character")])
+    keyboard.append([InlineKeyboardButton(text="◀️ Назад", callback_data="edit_character")])
     return InlineKeyboardMarkup(inline_keyboard=keyboard)
 
 
 def get_sheet_edit_menu():
-    """Меню редактирования листа персонажа"""
     return InlineKeyboardMarkup(inline_keyboard=[
         [
             InlineKeyboardButton(text="📝 Имя", callback_data="edit_name"),
@@ -90,21 +77,20 @@ def get_sheet_edit_menu():
     ])
 
 
-def get_edit_menu():
-    """Меню редактирования (старое, оставлено для совместимости)"""
-    return get_sheet_edit_menu()
-
-
 def get_back_menu():
-    """Кнопка назад"""
     return InlineKeyboardMarkup(inline_keyboard=[
         [InlineKeyboardButton(text="◀️ Назад в меню", callback_data="back_to_menu")]
     ])
 
 
 def get_confirm_delete():
-    """Подтверждение удаления"""
     return InlineKeyboardMarkup(inline_keyboard=[
         [InlineKeyboardButton(text="✅ Да, удалить", callback_data="confirm_delete")],
         [InlineKeyboardButton(text="❌ Отмена", callback_data="my_character")]
+    ])
+
+def get_confirm_edit_menu():
+    return InlineKeyboardMarkup(inline_keyboard=[
+        [InlineKeyboardButton(text="✅ Подтвердить", callback_data="confirm_edit")],
+        [InlineKeyboardButton(text="❌ Отменить", callback_data="cancel_edit")]
     ])
